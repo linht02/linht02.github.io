@@ -1,0 +1,273 @@
+/*
+Program name: patient-form.html
+Author: Linh Tran
+Date created: 02/03/2025
+Date last edited: The date you submitted it
+Version: 1.0
+Description: This is the form for the patient to fill out their information.
+*/
+.header {
+    background-color: #095d7e;
+    color: whitesmoke;
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.header img {
+    width: 100px;
+    height: auto;
+    transition: transform 0.3s ease; 
+}
+
+.header img:hover {
+    transform: scale(1.1); 
+}
+
+.header h1 {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    font-size: 2rem;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); 
+}
+
+
+.date-container {
+    position: absolute;
+    right: 10px;  /* Aligns to the left */
+    bottom: 10px; /* Positions at the bottom */
+    font-size: 14px;
+    font-style: italic;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f1f9ff;
+    color: #544541;
+    margin: 0;
+    padding: 0;
+    text-align: center ;
+    padding-bottom: 100px; 
+}
+.container {
+    width: 100%;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+table {
+    width: 100%;
+
+}
+td {
+    padding: 10px;
+    text-align:left;
+}
+input, select, textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.submit-btn {
+    background-color: #28a745;
+    color: white;
+}
+.reset-btn {
+    background-color: #dc3545;
+    color: white;
+}
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px 0;
+    background-color: #095d7e;
+    color: whitesmoke;
+    z-index: 100;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+}
+
+
+
+input[type="radio"],
+input[type="checkbox"] {
+    width: auto;  /* Prevents the input from taking up full width */
+    margin-right: 5px;
+    vertical-align: middle; /* Ensures they align with the text */
+}
+
+#reviewSection {
+    border: 2px solid black;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#reviewSection th, 
+#reviewSection td {
+    border: 2px solid black;
+    padding: 8px;
+    text-align: left;
+}
+
+#reviewSection th {
+    background-color: #f2f2f2;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #007bff; 
+    outline: none; 
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); 
+}
+
+input:valid, select:valid, textarea:valid {
+    border-color: #28a745; 
+}
+
+input:invalid, select:invalid, textarea:invalid {
+    border-color: #dc3545; 
+}
+.response {
+    font-size: 12px;
+    color: #dc3545; 
+    margin-top: 5px;
+}
+
+.response.valid {
+    color: #28a745; 
+}
+
+.response.error {
+    color: #dc3545; 
+}
+
+
+#reviewSection {
+    border: 2px solid #095d7e;
+    border-collapse: collapse;
+    width: 100%;
+    margin: 20px 0;
+    background-color: white;
+    display: none; /* Hidden by default */
+}
+
+#reviewSection th, 
+#reviewSection td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+#reviewSection th {
+    background-color: #f1f9ff;
+    color: #095d7e;
+}
+
+#reviewSection tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#reviewSection tr:hover {
+    background-color: #f1f1f1;
+}
+
+
+.clinic-info {
+    display: flex;
+    margin: 20px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.map-container {
+    flex: 1;
+}
+
+.clinic-details {
+    flex: 1;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.clinic-details h2 {
+    color: #2c3e50;
+    margin-top: 0;
+}
+
+.clinic-details h3 {
+    color: #3498db;
+    margin-bottom: 10px;
+}
+
+.clinic-details ul {
+    padding-left: 20px;
+}
+
+.clinic-details li {
+    margin-bottom: 5px;
+}
+
+@media (max-width: 768px) {
+    .clinic-info {
+        flex-direction: column;
+    }
+}
+
+
+
+/* Welcome Message Container */
+.welcome-container {
+    background-color: #e6f7ff;
+    padding: 10px 10px;
+    text-align: center;
+    border-bottom: 2px solid #095d7e;
+    font-family: Arial, sans-serif;
+}
+
+/* Welcome Text */
+.welcome-message {
+    font-size: 1.2em;
+    color: #095d7e;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* "Not [Name]?" Link */
+.not-user-link {
+    color: #130f0f;
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 0.9em;
+    transition: color 0.2s;
+    display: inline-block;
+    padding: 3px 6px;
+    border-radius: 3px;
+}
+
+.not-user-link:hover {
+    color: #b02a37;
+    text-decoration: none;
+    background-color: #f8d7da;
+}

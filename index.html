@@ -1,0 +1,884 @@
+<!--
+Program name: patient-form.html
+Author: Linh Tran
+Date created: 02/03/2025
+Date last edited: 03/06/2025
+Version: 2.0
+Description: This is the form for the patient to fill out their information.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Form</title>
+    <link rel="stylesheet" href="styles2.css">
+    <script src="cookiee.js"></script>
+
+    <script>
+        // Function to display the current date in the banner
+        window.onload = () => {
+            const today = new Date();
+            const options = { weekday: 'long', month: 'short', day: 'numeric', year: 'numeric' };
+            document.getElementById("currentDate").textContent = today.toLocaleDateString("en-US", options);
+        };
+    </script>
+    <script src="javascript.js" defer></script>
+<style> </style>
+</head>
+<body>
+       <!-- Welcome Message Container (will be populated by JavaScript) -->
+       <div id="welcomeContainer" class="welcome-container">
+        <!-- Message will be inserted here -->
+       </div>
+
+       
+    <!--banner-->
+    <div class="header">
+        <h1>SUNSET MEDICAL</h1>
+        <div class="date-container">
+            Today is: <span id="currentDate"></span>
+        </div>
+
+        <div class="header-content">
+            <img src="sunset.jpg" alt="hospital" width="200">
+        </div>
+    </div>
+
+    <!-- form -->
+    <form id="patientForm" action="thankyou.html" onsubmit="return validateAndSubmit()">
+
+    <table>
+            <tr>
+                <td><label for="first_name">First Name:</label></td>
+                <td><input type="text" id="first_name" name="first_name" maxlength="30" required
+                           oninput="checkFirstName()">
+                    <span id="first_name_response" class="response"></span></td>
+
+                <td><label for="middle_initial">Middle Initial:</label></td>
+                <td><input type="text" id="middle_initial" name="middle_initial" maxlength="1" size="1" pattern="[A-Za-z]" required 
+                            oninput="checkMiddleInitial()">
+                    <span id="middle_initial_response" class="response"></span></td>
+                    
+
+                <td><label for="last_name">Last Name:</label></td>
+                <td><input type="text" id="last_name" name="last_name" maxlength="30" required 
+                        oninput="checkLastName()">
+                    <span id="last_name_response" class="response"></span>
+                </tr>
+            <tr>
+                <td><label for="dob">Date of Birth:</label></td>
+                <td><input type="date" id="dob" name="dob" required title="Select your birthdate"
+                            oninput="checkDOB()">
+                    <span id="dob_response" class="response"></span>
+            </tr>
+            <tr>
+                <td><label for="ssn">Social Security:</label></td>
+                <td><input type="password" id="ssn" name="ssn" maxlength="11" required 
+                        oninput="checkSSN()">
+                    <span id="ssn_response" class="response"></span></td>
+            </tr>
+
+            <tr>
+                <td><label for="phone">Phone Number:</label></td>
+                <td colspan="3">
+                    <input type="tel" id="phone" name="phone" placeholder="123-456-7890" required
+                           maxlength="12" 
+                           oninput="formatPhoneNumber()">
+                    <span id="phone_response" class="response"></span>
+                </td>
+            </tr>
+
+            <tr>
+                <td><label for="address1">Address Line 1:</label></td>
+                <td colspan="3"><input type="text" id="address1" name="address1" maxlength="30" required
+                    oninput="checkAddress1()">
+                    <span id="address1_response" class="response"></span></td>
+            </tr>
+            <tr>
+                <td><label for="address2">Address Line 2:</label></td>
+                <td colspan="3"><input type="text" id="address2" name="address2" maxlength="30"
+                    oninput="checkAddress2()">
+                    <span id="address2_response" class="response"></span></td>
+            </tr>
+            <tr>
+                <td><label for="city">City:</label></td>
+                <td><input type="text" id="city" name="city" maxlength="30" required
+                    oninput="checkCity()">
+                    <span id="city_response" class="response"></span></td>
+
+                <td><label for="state">State:</label></td>
+                <td>
+                    <select id="state" name="state" required>
+    <option value="">Select State</option>
+    <option value="AL">Alabama</option>
+    <option value="AK">Alaska</option>
+    <option value="AZ">Arizona</option>
+    <option value="AR">Arkansas</option>
+    <option value="CA">California</option>
+    <option value="CO">Colorado</option>
+    <option value="CT">Connecticut</option>
+    <option value="DE">Delaware</option>
+    <option value="DC">District of Columbia</option>
+    <option value="FL">Florida</option>
+    <option value="GA">Georgia</option>
+    <option value="HI">Hawaii</option>
+    <option value="ID">Idaho</option>
+    <option value="IL">Illinois</option>
+    <option value="IN">Indiana</option>
+    <option value="IA">Iowa</option>
+    <option value="KS">Kansas</option>
+    <option value="KY">Kentucky</option>
+    <option value="LA">Louisiana</option>
+    <option value="ME">Maine</option>
+    <option value="MD">Maryland</option>
+    <option value="MA">Massachusetts</option>
+    <option value="MI">Michigan</option>
+    <option value="MN">Minnesota</option>
+    <option value="MS">Mississippi</option>
+    <option value="MO">Missouri</option>
+    <option value="MT">Montana</option>
+    <option value="NE">Nebraska</option>
+    <option value="NV">Nevada</option>
+    <option value="NH">New Hampshire</option>
+    <option value="NJ">New Jersey</option>
+    <option value="NM">New Mexico</option>
+    <option value="NY">New York</option>
+    <option value="NC">North Carolina</option>
+    <option value="ND">North Dakota</option>
+    <option value="OH">Ohio</option>
+    <option value="OK">Oklahoma</option>
+    <option value="OR">Oregon</option>
+    <option value="PA">Pennsylvania</option>
+    <option value="PR">Puerto Rico</option>
+    <option value="RI">Rhode Island</option>
+    <option value="SC">South Carolina</option>
+    <option value="SD">South Dakota</option>
+    <option value="TN">Tennessee</option>
+    <option value="TX">Texas</option>
+    <option value="UT">Utah</option>
+    <option value="VT">Vermont</option>
+    <option value="VA">Virginia</option>
+    <option value="WA">Washington</option>
+    <option value="WV">West Virginia</option>
+    <option value="WI">Wisconsin</option>
+    <option value="WY">Wyoming</option>
+
+                    </select>
+                    <span id="state_response" class="response"></span>
+
+                </td>
+                <td><label for="zip">Zip Code:</label></td>
+                <td><input type="text" id="zip" name="zip" pattern="\d{5}(-\d{4})?" required 
+                    oninput="checkZip()">
+                    <span id="zip_response" class="response"></span></td>
+                </tr>
+            <tr>
+                <td><label for="email">Email Address:</label></td>
+                <td colspan="3"><input type="email" id="email" name="email" required title="Enter a valid email address"
+                    oninput="checkEmail()">
+                    <span id="email_response" class="response"></span>
+                </td>
+            <tr>
+                <td><label for="symptoms">Describe your symptoms:</label></td>
+                <td colspan="3"><textarea id="symptoms" name="symptoms" rows="3" cols="50"
+                    oninput="checkSymptoms()"></textarea>
+                    <span id="symptoms_response" class="response"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>Gender:</td>
+                <td>
+                    <label><input type="radio" name="gender" value="Male"> Male</label>
+                    <label><input type="radio" name="gender" value="Female"> Female</label>
+                    <label><input type="radio" name="gender" value="Other"> Other</label>
+                </td>
+            </tr>
+            <tr>
+                <td>Have you been vaccinated?</td>
+                <td>
+                    <label><input type="radio" name="vaccinated" value="Yes"> Yes</label>
+                    <label><input type="radio" name="vaccinated" value="No"> No</label>
+                </td>
+            </tr>
+            <tr>
+                <td>Do you have insurance?</td>
+                <td>
+                    <label><input type="radio" name="insurance" value="Yes"> Yes</label>
+                    <label><input type="radio" name="insurance" value="No"> No</label>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="health">Health Status (1-10):</label></td>
+                <td colspan="3">
+                    <input type="range" id="health" name="health" min="1" max="10" 
+                        oninput="checkHealth()">
+                    <span id="health_response" class="response"></span>
+                    <script>
+                        function checkHealth() {
+                            const health = document.getElementById("health").value;
+                            const healthResponse = document.getElementById("health_response");
+                            
+                            healthResponse.textContent = health; // Update displayed value dynamically
+                        }
+                        </script>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="user_id">User ID:</label></td>
+                <td>
+                    <input type="text" id="user_id" name="user_id" maxlength="20" required 
+                           oninput="checkUserID()">
+                    <span id="user_id_response" class="response"></span>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="password">Password:</label></td>
+                <td>
+                    <input type="password" id="password" name="password" required 
+                           pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d@$!%*?&]{8,}$" 
+                           title="Password must be at least 8 characters long, containing at least 1 uppercase letter, 1 number, and 1 special character." 
+                           oninput="checkPassword()">
+                    <span id="password_response" class="response"></span>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="confirm_password">Re-enter Password:</label></td>
+                <td>
+                    <input type="password" id="confirm_password" name="confirm_password" required 
+                           oninput="checkConfirmPassword()">
+                    <span id="confirm_password_response" class="response"></span>
+                </td>
+            </tr>
+            
+        </table>
+
+          <!-- Clinic Info Section -->
+          <div class="clinic-info">
+            <div class="map-container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3466.018539855663!2d-95.63585372413568!3d29.69388943497111!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8641211a2e5f7f3b%3A0x1e9c4b8e8f434f0!2sSugar%20Land%2C%20TX%2077496!5e0!3m2!1sen!2sus!4v1717461234567!5m2!1sen!2sus" 
+                    width="100%" 
+                    height="400" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+            <div class="clinic-details">
+                <h2>About Sunset Medical</h2>
+                <p>Sunset Medical is a premier healthcare provider in Sugar Land, Texas, offering comprehensive medical services with a patient-centered approach. Our team of experienced physicians and healthcare professionals is dedicated to providing exceptional care.</p>
+                
+                <h3>Opening Hours</h3>
+                <ul>
+                    <li>Monday - Friday: 8:00 AM - 6:00 PM</li>
+                    <li>Saturday: 9:00 AM - 3:00 PM</li>
+                    <li>Sunday: Closed</li>
+                    <li>Emergency Services: 24/7</li>
+                </ul>
+                
+                <h3>Services</h3>
+                <ul>
+                    <li>Primary Care</li>
+                    <li>Pediatrics</li>
+                    <li>Women's Health</li>
+                    <li>Chronic Disease Management</li>
+                    <li>Preventive Care</li>
+                    <li>Lab Services</li>
+                </ul>
+            </div>
+        </div>
+
+         <!-- Remember Me Checkbox -->
+         <div class="remember-me">
+            <label>
+                <input type="checkbox" id="remember_me" name="remember_me" checked>
+                Remember my information for next time
+            </label>
+        </div>
+    
+        <br>
+        <button type="reset" id="reset">CLEAR</button>
+        <button type="submit" id="submit" onclick="return validateAllFields()">SUBMIT</button>        
+        <button type="button" id="review" onclick="updateReviewSection()">REVIEW</button>
+
+    </form>
+    
+    <hr> 
+
+      
+    <div class="footer">
+        <p>We'R'Docs Medical | PO BOX 18881, Sugar Land, TX 77496</p>
+        <button onclick="window.location.href='https://www.hcahoustonhealthcare.com/contact-us'">Contact Us</button>
+    </div>
+
+
+
+    <table id="reviewSection">
+        <tr>
+            <th colspan="3">
+                <h2>Review Your Information</h2>
+            </th>
+        </tr>
+        <tr>
+            <th>Data Name</th>
+            <th>Type</th>
+            <th>Value</th>
+        </tr>
+        <!-- Data fields -->
+        <tr>
+            <td>first_name</td>
+            <td>Text</td>
+            <td> <span id="review_first_name"> </span></td>
+        </tr>
+        <tr>
+            <td>middle_initial</td>
+            <td>Text</td>
+            <td> <span id="review_middle_initial"> </span></td>
+        </tr>
+        <tr>
+            <td>last_name</td>
+            <td>Text</td>
+            <td> <span id="review_last_name"> </span></td>
+        </tr>
+        <tr>
+            <td>dob</td>
+            <td>Date</td>
+            <td> <span id="review_dob"> </span></td>
+        </tr>
+        <tr>
+            <td>ssn</td>
+            <td>Password</td>
+            <td> <span id="review_ssn"> </span></td>
+        </tr>
+        <tr>
+            <td>phone</td>
+            <td>Number</td>
+            <td id="review_phone"></td>
+        </tr>
+        <tr>
+            <td>address1</td>
+            <td>Text</td>
+            <td> <span id="review_address1"> </span></td>
+        </tr>
+        <tr>
+            <td>address2</td>
+            <td>Text</td>
+            <td> <span id="review_address2"> </span></td>
+        </tr>
+        <tr>
+            <td>city</td>
+            <td>Text</td>
+            <td> <span id="review_city"> </span></td>
+        </tr>
+        <tr>
+            <td>state</td>
+            <td>Dropdown</td>
+            <td> <span id="review_state"> </span></td>
+        </tr>
+        <tr>
+            <td>zip</td>
+            <td>Text</td>
+            <td> <span id="review_zip"> </span></td>
+        </tr>
+        <tr>
+            <td>email</td>
+            <td>Email</td>
+            <td> <span id="review_email"> </span></td>
+        </tr>
+        <tr>
+            <td>symptoms</td>
+            <td>Textarea</td>
+            <td> <span id="review_symptoms"> </span></td>
+        </tr>
+        <tr>
+            <td>gender</td>
+            <td>Radio</td>
+            <td> <span id="review_gender"> </span></td>
+        </tr>
+        <tr>
+            <td>vaccinated</td>
+            <td>Radio</td>
+            <td> <span id="review_vaccinated"> </span></td>
+        </tr>
+        <tr>
+            <td>insurance</td>
+            <td>Radio</td>
+            <td> <span id="review_insurance"> </span></td>
+        </tr>
+        <tr>
+            <td>health</td>
+            <td>Range</td>
+            <td> <span id="review_health"> </span></td>
+        </tr>
+        <tr>
+            <td>user_id</td>
+            <td>Text</td>
+            <td> <span id="review_user_id"> </span></td>
+        </tr>
+        <tr> 
+            <td>password</td>
+            <td>Password</td>
+            <td> <span id="review_password"> </span></td>
+        </tr>
+        <tr>
+            <td>confirm_password</td>
+            <td>Password</td>
+            <td> <span id="review_confirm_password"> </span></td>
+        </tr>
+
+
+        <tr>
+            <td></td>
+            <td>reset</td>
+            <td><span id="reviewClear"></span></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>submit</td>
+            <td><span id="reviewSubmit"></span></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>button</td>
+            <td><span id="reviewReview"></span></td>
+        </tr>
+        
+    </table>
+    <script> // Function to update review section and toggle visibility
+        function updateReviewSection() {
+            // Get form values
+            const firstName = document.getElementById('first_name').value;
+            const middleInitial = document.getElementById('middle_initial').value;
+            const lastName = document.getElementById('last_name').value;
+            const dob = document.getElementById('dob').value;
+            const ssn = document.getElementById('ssn').value;
+            const phone = document.getElementById('phone').value;
+            const address1 = document.getElementById('address1').value;
+            const address2 = document.getElementById('address2').value;
+            const city = document.getElementById('city').value;
+            const state = document.getElementById('state').value;
+            const zip = document.getElementById('zip').value;
+            const email = document.getElementById('email').value;
+            const symptoms = document.getElementById('symptoms').value;
+            const gender = document.querySelector('input[name="gender"]:checked') ? document.querySelector('input[name="gender"]:checked').value : '';
+            const vaccinated = document.querySelector('input[name="vaccinated"]:checked') ? document.querySelector('input[name="vaccinated"]:checked').value : '';
+            const insurance = document.querySelector('input[name="insurance"]:checked') ? document.querySelector('input[name="insurance"]:checked').value : '';
+            const health = document.getElementById('health').value;
+            const userId = document.getElementById('user_id').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm_password').value;
+        
+            // Update review values
+            document.getElementById('review_first_name').textContent = firstName;
+            document.getElementById('review_middle_initial').textContent = middleInitial;
+            document.getElementById('review_last_name').textContent = lastName;
+            document.getElementById('review_dob').textContent = dob;
+            document.getElementById('review_ssn').textContent = ssn;
+            document.getElementById('review_phone').textContent = phone;
+            document.getElementById('review_address1').textContent = address1;
+            document.getElementById('review_address2').textContent = address2;
+            document.getElementById('review_city').textContent = city;
+            document.getElementById('review_state').textContent = state;
+            document.getElementById('review_zip').textContent = zip;
+            document.getElementById('review_email').textContent = email;
+            document.getElementById('review_symptoms').textContent = symptoms;
+            document.getElementById('review_gender').textContent = gender;
+            document.getElementById('review_vaccinated').textContent = vaccinated;
+            document.getElementById('review_insurance').textContent = insurance;
+            document.getElementById('review_health').textContent = health;
+            document.getElementById('review_user_id').textContent = userId;
+            document.getElementById('review_password').textContent = '*'.repeat(password.length);
+            document.getElementById('review_confirm_password').textContent = '*'.repeat(confirmPassword.length);
+        
+        
+            // Display button names in review section
+            document.getElementById('reviewClear').textContent = 'Reset'; // Button name
+            document.getElementById('reviewSubmit').textContent = 'Submit'; // Button name
+            document.getElementById('reviewReview').textContent = 'Review'; // Button name
+        
+            // Toggle review section visibility
+            const reviewSection = document.getElementById('reviewSection');
+            if (reviewSection.style.display === 'none' || reviewSection.style.display === '') {
+                reviewSection.style.display = 'block'; // Show the review section
+            } else {
+                reviewSection.style.display = 'none'; // Hide the review section
+            }
+        }
+           
+        // Attach event listeners to form fields
+        document.getElementById('first_name').addEventListener('input', updateReviewSection);
+        document.getElementById('middle_initial').addEventListener('input', updateReviewSection);
+        document.getElementById('last_name').addEventListener('input', updateReviewSection);
+        document.getElementById('dob').addEventListener('input', updateReviewSection);
+        document.getElementById('ssn').addEventListener('input', updateReviewSection);
+        document.getElementById('phone').addEventListener('input',updateReviewSection);
+        document.getElementById('address1').addEventListener('input', updateReviewSection);
+        document.getElementById('address2').addEventListener('input', updateReviewSection);
+        document.getElementById('city').addEventListener('input', updateReviewSection);
+        document.getElementById('state').addEventListener('input', updateReviewSection);
+        document.getElementById('zip').addEventListener('input', updateReviewSection);
+        document.getElementById('email').addEventListener('input', updateReviewSection);
+        document.getElementById('symptoms').addEventListener('input', updateReviewSection);
+        document.getElementById('health').addEventListener('input', updateReviewSection);
+        document.getElementById('user_id').addEventListener('input', updateReviewSection);
+        document.getElementById('password').addEventListener('input', updateReviewSection);
+        document.getElementById('confirm_password').addEventListener('input', updateReviewSection);
+        
+        // Attach event listeners for radio buttons and checkboxes
+        document.querySelectorAll('input[name="gender"]').forEach(radio => {
+            radio.addEventListener('change', updateReviewSection);
+        });
+        document.querySelectorAll('input[name="vaccinated"]').forEach(radio => {
+            radio.addEventListener('change', updateReviewSection);
+        });
+        document.querySelectorAll('input[name="insurance"]').forEach(radio => {
+            radio.addEventListener('change', updateReviewSection);
+        });
+       
+       
+       
+        // Function to check form fields
+        function checkFirstName() {
+            const firstName = document.getElementById("first_name").value;
+            const first_name_response = document.getElementById("first_name_response");
+            const firstnameregex = /^[A-Za-z'-]{1,30}$/;
+            
+            const isValid = firstnameregex.test(firstName);
+            first_name_response.textContent = isValid ? "Valid" : "Invalid first name";
+            first_name_response.style.color = isValid ? "green" : "red";
+        
+            return isValid;
+        }
+        
+        function checkMiddleInitial() {
+            const middleInitial = document.getElementById("middle_initial").value;
+            const middleInitialResponse = document.getElementById("middle_initial_response");
+            const regex = /^[A-Za-z]{1}$/;
+            const isValid = regex.test(middleInitial);
+            middleInitialResponse.textContent = isValid ? "Valid" : "Invalid: 1 letter only";
+            middleInitialResponse.style.color = isValid ? "green" : "red";
+            return isValid;
+        }
+        
+        function checkLastName() {
+            const lastName = document.getElementById("last_name").value;
+            const lastNameResponse = document.getElementById("last_name_response");
+            const regex = /^[A-Za-z'-]{1,30}$/;
+            const isValid = regex.test(lastName);
+            lastNameResponse.textContent = isValid ? "Valid" : "Invalid last name";
+            lastNameResponse.style.color = isValid ? "green" : "red";
+            return isValid;
+        }
+        
+        function checkDOB() {
+            const dob = document.getElementById("dob").value;
+            const dobResponse = document.getElementById("dob_response");
+            const today = new Date();
+            const dobDate = new Date(dob);
+            const maxDate = new Date(today.getFullYear() - 120, today.getMonth(), today.getDate());
+            const minDate = today;
+        
+            const isValid = dobDate <= today && dobDate >= maxDate;
+            dobResponse.textContent = isValid ? "Valid" : "Invalid: Date must be within range";
+            dobResponse.style.color = isValid ? "green" : "red";
+            return isValid;
+        }
+        
+        function formatSSN() {
+    const ssnInput = document.getElementById("ssn");
+    let ssn = ssnInput.value.replace(/\D/g, ''); // Remove all non-digits
+    let formattedSSN = '';
+    
+    // Format as XXX-XX-XXXX
+    if (ssn.length > 0) {
+        formattedSSN = ssn.substring(0, 3);
+    }
+    if (ssn.length > 3) {
+        formattedSSN += '-' + ssn.substring(3, 5);
+    }
+    if (ssn.length > 5) {
+        formattedSSN += '-' + ssn.substring(5, 9);
+    }
+    
+    // Update the input value (this will show the dashes)
+    ssnInput.value = formattedSSN;
+    
+    // Create the masked display value (***-**-****)
+    let maskedSSN = '';
+    if (ssn.length > 0) {
+        maskedSSN = '***'.substring(0, Math.min(3, ssn.length));
+    }
+    if (ssn.length > 3) {
+        maskedSSN += '-**'.substring(0, Math.min(3, ssn.length-2));
+    }
+    if (ssn.length > 5) {
+        maskedSSN += '-****'.substring(0, Math.min(5, ssn.length-4));
+    }
+    
+    // For debugging, you can see the actual value in console
+    console.log("Actual SSN:", ssn);
+    
+    // Call the validation function
+    checkSSN();
+}
+
+function checkSSN() {
+    const ssnInput = document.getElementById("ssn");
+    const ssn = ssnInput.value.replace(/\D/g, ''); // Get just the digits
+    const ssnResponse = document.getElementById("ssn_response");
+    const regex = /^(?!000|666|9\d{2})\d{3}(?!00)\d{2}(?!0000)\d{4}$/;
+    const isValid = ssn.length === 9 && regex.test(ssn);
+    
+    ssnResponse.textContent = isValid ? "Valid" : "Invalid: Format ###-##-####";
+    ssnResponse.style.color = isValid ? "green" : "red";
+    return isValid;
+}
+        
+        function checkAddress1() {
+            const address1 = document.getElementById("address1").value;
+            const address1Response = document.getElementById("address1_response");
+            const regex = /^[A-Za-z0-9\s,'-]{1,50}$/;
+            const isValid = regex.test(address1);
+            address1Response.textContent = isValid ? "Valid" : "Invalid: Max 50 characters";
+            address1Response.style.color = isValid ? "green" : "red";
+            return isValid;
+        }   
+        
+        function checkAddress2() {
+            const address2 = document.getElementById("address2").value;
+            const address2Response = document.getElementById("address2_response");
+            const regex = /^[A-Za-z0-9\s,'-]{1,50}$/;
+            const isValid = regex.test(address2);
+            address2Response.textContent = isValid ? "Valid" : "Invalid: Max 50 characters";
+            address2Response.style.color = isValid ? "green" : "red";
+            return isValid;
+        }
+        
+        function checkCity() {
+            const city = document.getElementById("city").value;
+            const cityResponse = document.getElementById("city_response");
+            const regex = /^[A-Za-z\s,'-]{1,30}$/;
+            const isValid = regex.test(city);
+            cityResponse.textContent = isValid ? "Valid" : "Invalid: Max 30 characters";
+            cityResponse.style.color = isValid ? "green" : "red";
+            return isValid;
+        }
+        
+        function checkState() {
+            const state = document.getElementById("state").value;
+            const stateResponse = document.getElementById("state_response");
+            const regex = /^[A-Z]{2}$/;
+            const isValid = regex.test(state);
+            stateResponse.textContent = isValid ? "Valid" : "Invalid: Format XX";
+            stateResponse.style.color = isValid ? "green" : "red";
+            return isValid;
+        }
+        
+        function checkZip() {
+            const zip = document.getElementById("zip").value;
+            const zipResponse = document.getElementById("zip_response");
+            const regex = /^\d{5}(-\d{4})?$/;
+            const isValid = regex.test(zip);
+            const formattedZip = zip.replace(/[^0-9]/g, "").slice(0, 5); 
+            zipResponse.textContent = isValid ? `Valid: ${formattedZip}` : "Invalid: Format ##### or #####-####";
+            zipResponse.style.color = isValid ? "green" : "red";
+            return isValid;
+        }
+
+        function formatPhoneNumber() {
+            const phoneInput = document.getElementById("phone");
+            let phoneNumber = phoneInput.value.replace(/\D/g, ''); // Remove all non-digits
+            
+            // Format as XXX-XXX-XXXX
+            if (phoneNumber.length > 3 && phoneNumber.length <= 6) {
+                phoneNumber = phoneNumber.slice(0, 3) + '-' + phoneNumber.slice(3);
+            } else if (phoneNumber.length > 6) {
+                phoneNumber = phoneNumber.slice(0, 3) + '-' + phoneNumber.slice(3, 6) + '-' + phoneNumber.slice(6, 10);
+            }
+            
+            phoneInput.value = phoneNumber;
+            checkPhone(); // Call validation function
+        }
+        
+        function checkPhone() {
+            const phone = document.getElementById("phone").value;
+            const phoneResponse = document.getElementById("phone_response");
+            const phonePattern = /^[0-9]{3}-[0-9]{3}-[0-9]{4}$/;
+            
+            if (phone === "") {
+                phoneResponse.textContent = "";
+                return false;
+            } else if (!phonePattern.test(phone)) {
+                phoneResponse.textContent = "Format: 123-456-7890";
+                phoneResponse.style.color = "red";
+                return false;
+            } else {
+                phoneResponse.textContent = "✓ valid";
+                phoneResponse.style.color = "green";
+                return true;
+            }
+        }
+
+        function checkEmail() {
+            const email = document.getElementById("email").value;
+            const emailResponse = document.getElementById("email_response");
+            const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            const isValid = regex.test(email);
+            emailResponse.textContent = isValid ? "Valid" : "Invalid: Format name@domain.tld";
+            emailResponse.style.color = isValid ? "green" : "red";
+            return isValid;
+        }
+        
+        function checkUserID() {
+            const userID = document.getElementById("user_id").value;
+            const userIDResponse = document.getElementById("user_id_response");
+            const regex = /^[a-zA-Z][a-zA-Z0-9_-]{5,30}$/;
+            const isValid = regex.test(userID);
+            userIDResponse.textContent = isValid ? "Valid" : "Invalid";
+            userIDResponse.style.color = isValid ? "green" : "red";
+            return isValid;
+        }
+        
+        function checkPassword() {
+            const password = document.getElementById("password").value;
+            const passwordResponse = document.getElementById("password_response");
+            const regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,30}$/;
+            const isValid = regex.test(password);
+            passwordResponse.textContent = isValid ? "Valid" : "Invalid: Min 8 chars, 1 upper case, 1 number, 1 special char";
+            passwordResponse.style.color = isValid ? "green" : "red";
+            return isValid;
+        }
+        
+        function checkConfirmPassword() {
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirm_password").value;
+            const confirmPasswordResponse = document.getElementById("confirm_password_response");
+            const isValid = password === confirmPassword;
+            confirmPasswordResponse.textContent = isValid ? "Valid" : "Passwords do not match";
+            confirmPasswordResponse.style.color = isValid ? "green" : "red";
+            return isValid;
+        }
+        
+        function validateForm() {
+            return checkFirstName() && checkMiddleInitial() && checkLastName() && checkDOB() && checkZip() && checkEmail() && checkUserID() && checkPassword() && checkConfirmPassword();
+        }
+
+        // Combined validation and submission function
+function validateAndSubmit() {
+    // First validate all fields
+    if (!validateAllFields()) {
+        return false; // Prevent form submission
+    }
+    
+    // If all validations pass, show confirmation and submit
+    if (confirm("All fields are valid! Do you want to submit the form?")) {
+        return true; // Allow form submission
+    } else {
+        return false; // Cancel submission
+    }
+}
+
+// Master validation function that checks all fields
+function validateAllFields() {
+    let isValid = true;
+    
+    if (!checkFirstName()) {
+        alert("Please correct your first name.");
+        document.getElementById("first_name").focus();
+        isValid = false;
+    }
+    else if (!checkMiddleInitial()) {
+        alert("Please correct your middle initial (1 letter only).");
+        document.getElementById("middle_initial").focus();
+        isValid = false;
+    }
+    else if (!checkLastName()) {
+        alert("Please correct your last name.");
+        document.getElementById("last_name").focus();
+        isValid = false;
+    }
+    else if (!checkDOB()) {
+        alert("Please correct your date of birth.");
+        document.getElementById("dob").focus();
+        isValid = false;
+    }
+    else if (!checkSSN()) {
+        alert("Please correct your Social Security Number.");
+        document.getElementById("ssn").focus();
+        isValid = false;
+    }
+    else if (!checkPhone()) {
+        alert("Please correct your phone number.");
+        document.getElementById("phone").focus();
+        isValid = false;
+    }
+    else if (!checkAddress1()) {
+        alert("Please correct your address line 1.");
+        document.getElementById("address1").focus();
+        isValid = false;
+    }
+    else if (document.getElementById("address2").value && !checkAddress2()) {
+        alert("Please correct your address line 2.");
+        document.getElementById("address2").focus();
+        isValid = false;
+    }
+    else if (!checkCity()) {
+        alert("Please correct your city.");
+        document.getElementById("city").focus();
+        isValid = false;
+    }
+    else if (!checkState()) {
+        alert("Please select your state.");
+        document.getElementById("state").focus();
+        isValid = false;
+    }
+    else if (!checkZip()) {
+        alert("Please correct your zip code.");
+        document.getElementById("zip").focus();
+        isValid = false;
+    }
+    else if (!checkEmail()) {
+        alert("Please correct your email address.");
+        document.getElementById("email").focus();
+        isValid = false;
+    }
+
+    else if (!document.querySelector('input[name="gender"]:checked')) {
+        alert("Please select your gender.");
+        isValid = false;
+    }
+    else if (!document.querySelector('input[name="vaccinated"]:checked')) {
+        alert("Please select vaccination status.");
+        isValid = false;
+    }
+    else if (!document.querySelector('input[name="insurance"]:checked')) {
+        alert("Please select insurance status.");
+        isValid = false;
+    }
+    else if (!checkUserID()) {
+        alert("Please correct your User ID.");
+        document.getElementById("user_id").focus();
+        isValid = false;
+    }
+    else if (!checkPassword()) {
+        alert("Password must be at least 8 characters with 1 uppercase, 1 number, and 1 special character.");
+        document.getElementById("password").focus();
+        isValid = false;
+    }
+    else if (!checkConfirmPassword()) {
+        alert("Passwords do not match.");
+        document.getElementById("confirm_password").focus();
+        isValid = false;
+    }
+    
+    return isValid;
+}
+        </script>
+</body>
+</html>
+
+
+
+    
